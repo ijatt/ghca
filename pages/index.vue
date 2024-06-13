@@ -4,7 +4,7 @@
       <h1
         class="text-xl font-semibold text-slate-500 dark:text-slate-300 text-center"
       >
-        Hello, {{ user.role == "APPLICANT" ? user.applicant.name : user.admin?.name }}!
+        Hello, {{ user.role == "APPLICANT" ? user.applicant?.name : user.admin?.name }}!
       </h1>
       <ClientOnly>
         <Vue3Lottie 
@@ -24,6 +24,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { User } from '~/types/user';
 definePageMeta({
   layout: "auth",
   middleware: "auth"
@@ -32,7 +33,7 @@ definePageMeta({
 import { Vue3Lottie } from 'vue3-lottie';
 import animation from '~/public/animation.json'
 
-const user = ref({})
+const user = ref({} as User)
 
 onMounted( async () => {
   user.value = await $fetch("api/user", {
