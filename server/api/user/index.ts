@@ -33,6 +33,7 @@ export default defineEventHandler(async (event) => {
               universityName: true,
               contactNumber: true,
               address: true,
+              occupation: true
             },
           },
         },
@@ -57,9 +58,6 @@ export default defineEventHandler(async (event) => {
     // Merge the user data with the additional data
     const result = { ...user, ...additionalData };
     return result;
-    if(!user) return createError({ statusCode: 404, statusMessage: "User not found" })
-
-    return user
 
   } catch (error) {
     return createError({ statusCode: 500, statusMessage: "Internal Server Error" })

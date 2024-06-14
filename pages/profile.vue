@@ -11,7 +11,7 @@
       />
     </div>
     <form @submit.prevent="updateProfile">
-    <div class="mt-4 w-full flex justify-center">
+      <div class="mt-4 w-full flex justify-center">
         <div class="w-2/5">
           <div class="flex flex-col w-full space-y-2">
             <div class="flex gap-x-1">
@@ -23,6 +23,17 @@
               <InputLabel title="Full Name" />
             </div>
             <InputText name="name" />
+          </div>
+          <div class="flex flex-col w-full space-y-2">
+            <div class="flex gap-x-1">
+              <Icon
+                name="mdi:card-account-details"
+                size="16"
+                class="text-slate-500 my-auto"
+              />
+              <InputLabel title="NRIC" />
+            </div>
+            <InputText name="icNumber" />
           </div>
           <div class="flex flex-col w-full mb-2">
             <div class="flex flex-row gap-x-4">
@@ -127,8 +138,8 @@
             </button>
           </div>
         </div>
-    </div>
-  </form>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -137,7 +148,7 @@ import * as yup from "yup";
 
 definePageMeta({
   layout: "auth",
-  middleware: "auth"
+  middleware: "auth",
 });
 
 const user = ref();
@@ -154,6 +165,7 @@ onMounted(async () => {
 const { handleSubmit } = useForm({
   validationSchema: yup.object({
     name: yup.string(),
+    icNumber: yup.string(),
     contactNumber: yup.string(),
     email: yup.string(),
     address: yup.string(),
@@ -161,10 +173,11 @@ const { handleSubmit } = useForm({
     postcode: yup.string(),
     occupation: yup.string(),
     universityName: yup.string(),
-    id: yup.number()
+    id: yup.number(),
   }),
   initialValues: {
     name: userStore().user?.applicant?.name,
+    icNumber: userStore().user?.applicant?.icNumber,
     email: userStore().user?.email,
     contactNumber: userStore().user?.applicant?.contactNumber,
     address: userStore().user?.applicant?.address,
@@ -172,33 +185,33 @@ const { handleSubmit } = useForm({
     postcode: userStore().user?.applicant?.postcode,
     occupation: userStore().user?.applicant?.occupation,
     universityName: userStore().user?.applicant?.universityName,
-    id: userStore().user?.id
+    id: userStore().user?.id,
   },
 });
 
-const loading = ref(false)
-const toast = useToast()
+const loading = ref(false);
+const toast = useToast();
 const updateProfile = handleSubmit(async (data) => {
-  loading.value = true
+  loading.value = true;
   await $fetch("/api/user/update", {
     body: data,
-    method: "POST"
+    method: "POST",
   }).then(async () => {
     user.value = await $fetch("/api/user", {
       method: "GET",
       headers: {
-      authorization: `Bearer ${useTokenStore().accessToken}`,
-    },
-    })
-    userStore().setUser(user.value)
+        authorization: `Bearer ${useTokenStore().accessToken}`,
+      },
+    });
+    userStore().setUser(user.value);
     toast.add({
       id: "update-profile-success",
       title: "Update Profile Success",
       description: "You have successfully updated your profile.",
-    })
-    loading.value = false
-  })
-})
+    });
+    loading.value = false;
+  });
+});
 </script>
 
 <style></style>

@@ -38,18 +38,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="border bg-white border-slate-300 dark:border-slate-700 divide-x">
+          <tr v-for="application in applications" class="border bg-white border-slate-300 dark:border-slate-700 divide-x">
             <td class="text-sm text-start text-slate-500 whitespace-nowrap tracking-wide px-2 py-4 dark:text-slate-300">
-              AP1001
+              {{ application.id }}
             </td>
             <td class="text-sm text-start text-slate-500 whitespace-nowrap tracking-wide px-2 py-4 dark:text-slate-300">
-              Rumah Anak Yatim
+              {{ application.name }}
             </td>
             <td class="text-sm text-start text-slate-500 whitespace-nowrap tracking-wide px-2 py-4 dark:text-slate-300">
-              Pending
+              {{ application.status }}
             </td>
-            <td class="text-sm text-start text-slate-500 whitespace-nowrap tracking-wide px-2 py-4 dark:text-slate-300">
-              View
+            <td class="text-sm flex justify-center text-slate-500 whitespace-nowrap tracking-wide px-2 py-2 dark:text-slate-300">
+              <a :href="`${url}proposal/${application.fileName}`" target="_blank"
+                class="bg-slate-200 hover:bg-slate-300 py-1 rounded-md px-2"
+              >View</a>
             </td>
           </tr>
         </tbody>
@@ -62,6 +64,18 @@
 definePageMeta({
   layout: "auth",
 });
+
+const config = useRuntimeConfig()
+const url = config.public.BUCKET_URL
+const applications = ref([])
+onMounted(async () => {
+  applications.value = await $fetch("/api/applications", {
+    method: "POST",
+    body: {
+      userId: userStore().user?.id
+    }
+  })
+})
 </script>
 
 <style></style>

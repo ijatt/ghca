@@ -41,6 +41,7 @@ export default defineEventHandler(async (event) => {
         universityName: body.universityName,
         contactNumber: body.contactNumber,
         address: body.address,
+        occupation: body.occupation
       },
     });
 

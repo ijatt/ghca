@@ -19,6 +19,12 @@ enum Role {
   ADMIN
 }
 
+enum Status {
+  PENDING
+  REJECTED
+  APPROVED
+}
+
 model users {
   id        Int        @id @default(autoincrement())
   email     String     @unique
@@ -29,15 +35,16 @@ model users {
 }
 
 model admin {
-  id         Int    @id @default(autoincrement())
-  name       String
-  department String
-  userId     Int    @unique
-  user       users  @relation(fields: [userId], references: [id])
+  id           Int            @id @default(autoincrement())
+  name         String
+  department   String
+  userId       Int            @unique
+  user         users          @relation(fields: [userId], references: [id])
+  applications applications[]
 }
 
 model applicant {
-  id             Int    @id @default(autoincrement())
+  id             Int            @id @default(autoincrement())
   name           String
   icNumber       String?
   contactNumber  String?
@@ -45,6 +52,21 @@ model applicant {
   city           String?
   postcode       String?
   universityName String?
-  userId         Int    @unique
-  user           users  @relation(fields: [userId], references: [id])
+  occupation     String?
+  userId         Int            @unique
+  user           users          @relation(fields: [userId], references: [id])
+  applications   applications[]
+}
+
+model applications {
+  id           Int       @id @default(autoincrement())
+  name         String
+  finding      String
+  userId       Int
+  user         applicant @relation(fields: [userId], references: [id])
+  status       Status    @default(PENDING)
+  approvedBy   Int?
+  admin        admin?    @relation(fields: [approvedBy], references: [id])
+  approvedDate DateTime?
+  fileName     String?
 }
