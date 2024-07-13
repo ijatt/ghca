@@ -286,6 +286,7 @@ const submit = handleSubmit(async (data) => {
   }).then(() => {
     toastSuccess("Application Success", "Your application has been sent and waiting for approval.")
     loading.value = false;
+    navigateTo("/applications");
   })
   .catch((error) => toastError("Error Sending Application", error.statusMessage))
 });

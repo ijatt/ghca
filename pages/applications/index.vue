@@ -39,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="application in applications" class="border bg-white border-slate-300 dark:border-slate-700 divide-x">
+          <tr v-if="filteredApplication.length > 0" v-for="application in filteredApplication" class="border bg-white border-slate-300 dark:border-slate-700 divide-x">
             <td class="text-sm text-start text-slate-500 whitespace-nowrap tracking-wide px-2 py-4 dark:text-slate-300">
               {{ application.id }}
             </td>
@@ -53,6 +53,11 @@
               <a :href="`${url}proposal/${application.fileName}`" target="_blank"
                 class="bg-slate-200 hover:bg-slate-300 py-1 rounded-md px-2"
               >View</a>
+            </td>
+          </tr>
+          <tr v-else>
+            <td class="text-sm text-start text-slate-500 whitespace-nowrap tracking-wide px-2 py-4 dark:text-slate-300">
+              No Applications Found
             </td>
           </tr>
         </tbody>
