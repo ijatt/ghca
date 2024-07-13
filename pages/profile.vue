@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full overflow-y-auto">
     <h1 class="text-xl font-semibold text-slate-500 dark:text-slate-300">
-      USER PROFILE
+      User Profile
     </h1>
     <form @submit.prevent="updateProfile">
       <div class="mt-4 w-full flex justify-center">

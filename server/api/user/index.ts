@@ -46,6 +46,7 @@ export default defineEventHandler(async (event) => {
         select: {
           admin: {
             select: {
+              id: true,
               // Add fields specific to admin
               department: true,
               name: true

@@ -19,6 +19,7 @@
         Home
       </NuxtLink>
       <div
+        v-if="userStore().user.role === 'APPLICANT'"
         class="flex w-full py-4 px-8 hover:text-blue-500 hover:bg-slate-100 items-center gap-2 cursor-pointer dark:hover:bg-slate-800"
         :class="
           currentRoute.path.includes('/applications')
@@ -35,7 +36,20 @@
           :class="open ? 'rotate-180' : ''"
         />
       </div>
-      <div v-if="open" class="my-2">
+      <NuxtLink
+        v-else
+        to="/applications"
+        class="flex w-full py-4 px-8 hover:text-blue-500 hover:bg-slate-100 items-center gap-2 cursor-pointer dark:hover:bg-slate-800"
+        :class="
+          currentRoute.path === '/applications'
+            ? 'bg-slate-200 dark:bg-slate-700 text-blue-500'
+            : 'dark:text-slate-300 text-slate-500'
+        "
+      >
+        <Icon name="mdi:application-outline" class="w-6 h-6" />
+        All Applications
+      </NuxtLink>
+      <div v-if="open && userStore().user.role === 'APPLICANT'" class="my-2">
         <NuxtLink
           to="/applications/new"
           class="flex w-full px-8 py-4 text-sm hover:text-blue-500 whitespace-nowrap hover:bg-slate-200 items-center gap-2 cursor-pointer dark:hover:bg-slate-800"

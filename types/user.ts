@@ -23,3 +23,17 @@ interface Admin {
     name: string;
     department: string;
 }
+
+export interface Applications {
+    id: number
+    name: string
+    finding: string
+    fileName?: string
+    userId: number
+    createdAt: Date
+    status: string
+    user: Applicant
+    approvedBy: number
+    admin?: Admin
+    approvedAt: Date
+  }

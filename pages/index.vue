@@ -21,15 +21,15 @@
         />
       </ClientOnly>
     </div>  -->
-    <Card title="Total Application" :value="2" color="blue"/>
-    <Card title="Approved Application" :value="1" color="green" />
-    <Card title="Pending Application" :value="1" color="yellow" />
-    <Card title="Rejected Application" :value="0" color="rose" />
+    <Card title="Total Application" :value="applications.length" color="blue"/>
+    <Card title="Approved Application" :value="approved" color="green" />
+    <Card title="Pending Application" :value="pending" color="yellow" />
+    <Card title="Rejected Application" :value="rejected" color="rose" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import type { User } from '~/types/user';
+import type { User, Applications } from '~/types/user';
 definePageMeta({
   layout: "auth",
   middleware: "auth"
@@ -39,6 +39,7 @@ import { Vue3Lottie } from 'vue3-lottie';
 import animation from '~/public/animation.json'
 
 const user = ref({} as User)
+const applications = ref([] as Applications[])
 
 onMounted( async () => {
   user.value = await $fetch("api/user", {
@@ -48,6 +49,37 @@ onMounted( async () => {
     },
   });
   userStore().setUser(user.value)
+
+  if (user.value.role == "APPLICANT") {
+    applications.value = await $fetch("/api/applications", {
+      method: "POST",
+      body: {
+        userId: userStore().user?.id
+      }
+    })
+  } else {
+    applications.value = await $fetch("/api/applications/get-all", {
+      method: "GET",
+    })
+  }
+})
+
+const pending = computed(() => {
+  return applications.value.filter((application) => {
+    return application.status == "PENDING"
+  }).length
+})
+
+const approved = computed(() => {
+  return applications.value.filter((application) => {
+    return application.status == "APPROVED"
+  }).length
+})
+
+const rejected = computed(() => {
+  return applications.value.filter((application) => {
+    return application.status == "REJECTED"
+  }).length
 })
 </script>
 

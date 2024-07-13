@@ -35,12 +35,13 @@ model users {
 }
 
 model admin {
-  id           Int            @id @default(autoincrement())
-  name         String
-  department   String
-  userId       Int            @unique
-  user         users          @relation(fields: [userId], references: [id])
-  applications applications[]
+  id            Int            @id @default(autoincrement())
+  name          String
+  department    String?
+  contactNumber String?
+  userId        Int            @unique
+  user          users          @relation(fields: [userId], references: [id])
+  applications  applications[]
 }
 
 model applicant {

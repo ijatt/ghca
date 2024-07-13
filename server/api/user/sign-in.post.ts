@@ -32,14 +32,37 @@ export default defineEventHandler(async (event) => {
       expires: new Date(Date.now() + 1000 * 60 * 60 * 3)
     })
 
-    const profile = await prisma.applicant.findUniqueOrThrow({
-      where: {
-        userId: user.id
-      }
-    })
+    // const profile = await prisma.applicant.findUniqueOrThrow({
+    //   where: {
+    //     userId: user.id
+    //   }
+    // })
 
-    return profile.name
+    // return profile.name
+    let name = ""
+    if (user.role === 'APPLICANT') {
+      const data = await prisma.applicant.findUniqueOrThrow({
+        where: {
+          userId: user.id
+        },
+        select: {
+          name: true
+        }
+      })
+      name = data.name
+    } else if (user.role === 'ADMIN') {
+      const data = await prisma.admin.findUniqueOrThrow({
+        where: {
+          userId: user.id
+        },
+        select: {
+          name: true
+        }
+      })
+      name = data.name
+    }
 
+    return name
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2025") {

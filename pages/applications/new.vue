@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full overflow-y-auto">
     <h1 class="text-xl font-semibold text-slate-500 dark:text-slate-300">
-      New Applications Form
+      New Application Form
     </h1>
     <p class="text-sm text-slate-500 italic">
       Please fill all fields in the form
@@ -117,7 +117,7 @@
             <div class="flex flex-col w-full space-y-2">
               <div class="flex flex-col gap-x-1">
                 <InputLabel
-                  title="How do you know about Great Heart Charity Association?"
+                  title="How do you know about Great Vision Charity Association?"
                 />
                 <label class="flex items-center text-slate-600 mt-2">
                   <input
