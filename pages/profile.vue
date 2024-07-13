@@ -1,15 +1,8 @@
 <template>
-  <div class="w-full">
+  <div class="w-full h-full overflow-y-auto">
     <h1 class="text-xl font-semibold text-slate-500 dark:text-slate-300">
-      Profile
+      USER PROFILE
     </h1>
-    <div class="w-full flex justify-center">
-      <img
-        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-        class="w-24 h-24 rounded-full"
-        alt=""
-      />
-    </div>
     <form @submit.prevent="updateProfile">
       <div class="mt-4 w-full flex justify-center">
         <div class="w-2/5">
@@ -100,17 +93,6 @@
           </div>
           <div class="flex flex-col w-full mb-2">
             <div class="flex flex-row gap-x-4">
-              <div class="w-full space-y-2">
-                <div class="flex gap-x-1">
-                  <Icon
-                    name="mdi:office-building"
-                    size="16"
-                    class="text-slate-500 my-auto"
-                  />
-                  <InputLabel title="Occupation" />
-                </div>
-                <InputText name="occupation" />
-              </div>
               <div class="w-full space-y-2">
                 <div class="flex gap-x-1">
                   <Icon

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="col-span-12 sm:row-start-2 sm:col-span-6 md:col-span-3 bg-gradient-to-br flex justify-between flex-col p-4 text-white rounded-xl"
+    class="col-span-12 sm:row-start-3 sm:col-span-6 md:col-span-3 bg-gradient-to-br flex justify-between flex-col p-4 text-white rounded-xl"
     :class="classes"
   >
     <p class="text-sm tracking-wide">
@@ -37,7 +37,12 @@ const classes = computed(() => {
     return "from-pink-700 to-pink-500 shadow-sm shadow-pink-500 dark:shadow-none";
   } else if (props.color === "emerald") {
     return "from-emerald-500 to-emerald-600 shadow-sm shadow-emerald-500 dark:shadow-none";
-  } else {
+  } else if (props.color === "green") {
+    return "from-green-500 to-green-600 shadow-sm shadow-green-500 dark:shadow-none";
+  } else if (props.color === "yellow") {
+    return "from-yellow-500 to-yellow-600 shadow-sm shadow-yellow-500 dark:shadow-none";
+  }
+  else {
     return "from-blue-800 to-blue-500 shadow-sm shadow-blue-500 dark:shadow-none";
   }
 });
@@ -51,6 +56,8 @@ const percentageClasses = computed(() => {
     return "text-pink-600";
   } else if (props.color == "emerald") {
     return "text-emerald-600";
+  } else if (props.color == "green") {
+    return "text-green-600";
   } else {
     return "text-blue-700";
   }

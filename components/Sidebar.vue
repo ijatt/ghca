@@ -2,15 +2,10 @@
   <div class="bg-gray-50 w-full h-screen py-4 shadow"
   :class="!isOpen ? 'w-0 opacity-0' : 'w-64 opacity-100'"
   >
-    <div class="flex items-center justify-center gap-x-2 m-4">
-      <Icon name="mdi:pac-man" size="32" />
-      <h1
-        class="text-2xl inline-block font-bold dark:text-slate-200 font-sans tracking-wide"
-      >
-        NGO
-      </h1>
+    <div class="flex items-center justify-center gap-x-2">
+      <img src="/public/great-vision-logo.png" class="w-20 h-16" />
     </div>
-    <div class="mt-12">
+    <div class="mt-4">
       <NuxtLink
         to="/"
         class="flex w-full py-4 px-8 hover:text-blue-500 hover:bg-slate-100 items-center gap-2 cursor-pointer dark:hover:bg-slate-800"

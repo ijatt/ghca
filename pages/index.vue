@@ -1,6 +1,11 @@
 <template>
   <div class="w-full grid grid-cols-12 gap-4 h-full sm:h-auto overflow-y-auto">
-    <div class="col-span-12 row-start-1  sm:col-start-1 md:col-span-6 md:col-start-4 p-4 bg-white rounded-xl">
+    <div class="col-span-12">
+      <h1 class="text-xl font-semibold text-slate-500 dark:text-slate-300">
+      Charity Proposal Application System
+    </h1>
+    </div>
+    <!-- <div class="col-span-12 row-start-2  sm:col-start-1 md:col-span-6 md:col-start-4 p-4 bg-white rounded-xl">
       <h1
         class="text-xl font-semibold text-slate-500 dark:text-slate-300 text-center"
       >
@@ -14,12 +19,12 @@
           :autoplay="true"
           style="width: 300px; height: 200px;"
         />
-      </ClientOnly> 
-    </div> 
+      </ClientOnly>
+    </div>  -->
     <Card title="Total Application" :value="2" color="blue"/>
-    <Card title="Approved Application" :value="1" color="rose" />
-    <Card title="Pending Application" :value="1" color="pink" />
-    <Card title="Rejected Application" :value="0" color="emerald" />
+    <Card title="Approved Application" :value="1" color="green" />
+    <Card title="Pending Application" :value="1" color="yellow" />
+    <Card title="Rejected Application" :value="0" color="rose" />
   </div>
 </template>
 

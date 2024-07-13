@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 export async function uploadImage(file: File, folder: string): Promise<string> {
   const client = supabase()
   try {
-      const { data, error } = await client.storage.from(folder).upload(`${uuidv4()}.pdf`, file)
+      const { data, error } = await client.storage.from(folder).upload(file.name,file)
       if (error) throw error
       return data.path
   } catch (error) {

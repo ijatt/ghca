@@ -100,17 +100,6 @@
                 <div class="w-full space-y-2">
                   <div class="flex gap-x-1">
                     <Icon
-                      name="mdi:office-building"
-                      size="16"
-                      class="text-slate-500 my-auto"
-                    />
-                    <InputLabel title="Occupation" />
-                  </div>
-                  <InputText name="occupation" />
-                </div>
-                <div class="w-full space-y-2">
-                  <div class="flex gap-x-1">
-                    <Icon
                       name="mdi:school"
                       size="16"
                       class="text-slate-500 my-auto"
