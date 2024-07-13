@@ -21,7 +21,7 @@
         />
       </ClientOnly>
     </div>  -->
-    <Card title="Total Application" :value="applications.length" color="blue"/>
+    <Card title="Total Application" :value="applications?.length" color="blue"/>
     <Card title="Approved Application" :value="approved" color="green" />
     <Card title="Pending Application" :value="pending" color="yellow" />
     <Card title="Rejected Application" :value="rejected" color="rose" />
@@ -50,7 +50,7 @@ onMounted( async () => {
   });
   userStore().setUser(user.value)
 
-  if (user.value.role == "APPLICANT") {
+  if (user?.value?.role == "APPLICANT") {
     applications.value = await $fetch("/api/applications", {
       method: "POST",
       body: {
