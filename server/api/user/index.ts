@@ -26,6 +26,7 @@ export default defineEventHandler(async (event) => {
         select: {
           applicant: {
             select: {
+              id: true,
               name: true,
               icNumber: true,
               city: true,

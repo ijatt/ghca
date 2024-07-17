@@ -54,7 +54,7 @@ onMounted( async () => {
     applications.value = await $fetch("/api/applications", {
       method: "POST",
       body: {
-        userId: userStore().user?.id
+        userId: userStore().user?.applicant?.id
       }
     })
   } else {

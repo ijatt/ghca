@@ -229,22 +229,20 @@ const { handleSubmit } = useForm({
     address: yup.string().required("Address is required."),
     city: yup.string().required("City is required."),
     postcode: yup.string().required("Postcode is required."),
-    occupation: yup.string().required("Occupation is required."),
     universityName: yup.string().required("University name is required."),
     finding: yup.string().required("Please select one."),
     icNumber: yup.string().required("IC number is required."),
     projectName: yup.string().required("Project name is required.")
   }),
   initialValues: {
-    name: user.value?.applicant?.name,
-    icNumber: user.value?.applicant?.icNumber,
-    contactNumber: user.value?.applicant?.contactNumber,
-    email: user.value?.email,
-    address: user.value?.applicant?.address,
-    city: user.value?.applicant?.city,
-    postcode: user.value?.applicant?.postcode,
-    occupation: user.value?.applicant?.occupation,
-    universityName: user.value?.applicant?.universityName,
+    name: user.value?.applicant?.name || "",
+    icNumber: user.value?.applicant?.icNumber || "",
+    contactNumber: user.value?.applicant?.contactNumber || "",
+    email: user.value?.email || "",
+    address: user.value?.applicant?.address || "",
+    city: user.value?.applicant?.city || "",
+    postcode: user.value?.applicant?.postcode || "",
+    universityName: user.value?.applicant?.universityName || "",
   },
 });
 
@@ -261,8 +259,6 @@ const hanldeChange = () => {
   }
 };
 
-const fileName = ref<string>("");
-const toast = useToast();
 const submit = handleSubmit(async (data) => {
   let fileNames
   if (!fileToUpload.value) {
@@ -281,7 +277,7 @@ const submit = handleSubmit(async (data) => {
     body: {
       ...data,
       fileNames,
-      userID: userStore().user?.id
+      userID: userStore().user?.applicant?.id
     }
   }).then(() => {
     toastSuccess("Application Success", "Your application has been sent and waiting for approval.")

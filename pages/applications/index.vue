@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full overflow-y-auto">
     <h1 class="text-xl font-semibold text-slate-500 dark:text-slate-300">
-      My Applications
+      List of Applications
     </h1>
     <div class="mt-4 flex w-full justify-end">
       <input
@@ -169,7 +169,7 @@ onMounted(async () => {
     applications.value = await $fetch("/api/applications", {
       method: "POST",
       body: {
-        userId: userStore().user?.id
+        userId: userStore().user?.applicant?.id
       }
     })
   } else {
@@ -204,7 +204,8 @@ const sortedApplication = computed(() => {
 const filteredApplication = computed(() => {
   return sortedApplication.value.filter((application) => {
     return (application.name.toLowerCase().includes(search.value.toLowerCase())
-    || application.status.toLowerCase().includes(search.value.toLowerCase()))
+    || application.status.toLowerCase().includes(search.value.toLowerCase())
+    || application.id.toString().includes(search.value))
   })
 })
 </script>

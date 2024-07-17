@@ -119,7 +119,7 @@ watch(
 );
 
 const signOut = async () => {
-  await $fetch("api/user/sign-out", {
+  await $fetch("/api/user/sign-out", {
     method: "POST",
   }).then(async () => {
     useTokenStore().accessToken = "";
